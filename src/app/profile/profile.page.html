@@ -1,0 +1,79 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar">
+      <ion-title>
+          {{'My Profile.My Profile' |translate}}
+      </ion-title>
+      <ion-buttons slot="start">
+          <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+          <ion-icon name="pencil-outline" style="font-size: 27px; padding-right: 15px;" *ngIf="editForm" (click)="edit()"></ion-icon>
+      </ion-buttons>
+      <ion-buttons slot="end">
+          <ion-icon name="log-out-outline" style="font-size: 27px;" *ngIf="editForm" (click)="signOut()"></ion-icon>
+          <!-- <ion-icon name="pencil-outline" style="font-size: 27px;" *ngIf="editForm" (click)="edit()"></ion-icon> -->
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+      <ion-card-content>
+          <form [formGroup]="profileForm">
+              <ion-item>
+                  <ion-label>
+                      <ion-icon name="person-outline"></ion-icon>&nbsp;&nbsp;&nbsp; {{'My Profile.Name' |translate}} : </ion-label>
+                  <ion-input type="text" formControlName="userName" [disabled]="editForm"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label>
+                      <ion-icon name="call-outline"></ion-icon>&nbsp;&nbsp;&nbsp; {{'My Profile.Mobile No' |translate}} : </ion-label>
+                  <ion-input type="text" formControlName="mobileNo" [disabled]="editForm"></ion-input>
+              </ion-item>
+              <ion-item>
+                  <ion-label>
+                      <ion-icon name="mail-outline"></ion-icon>&nbsp;&nbsp;&nbsp; {{'My Profile.Email' |translate}} : </ion-label>
+                  <ion-input type="text" formControlName="email" [disabled]="editForm"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="editForm">
+                  <ion-label>
+                      <ion-icon name="lock-closed-outline"></ion-icon>&nbsp;&nbsp;&nbsp; {{'My Profile.Password' |translate}} : </ion-label>
+                  <ion-input type="password" formControlName="password" [disabled]="editForm"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!editForm">
+                  <ion-label>
+                      <ion-icon name="lock-open-outline"></ion-icon>&nbsp;&nbsp;&nbsp; {{'My Profile.Old Password' |translate}}: </ion-label>
+                  <ion-input type="password" formControlName="oldPassword" (ionBlur)="checkOldPassword()"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!editForm">
+                  <ion-label>
+                      <ion-icon name="lock-closed-outline"></ion-icon>&nbsp;&nbsp;&nbsp; {{'My Profile.New Password' |translate}} : </ion-label>
+                  <ion-input type="password" formControlName="newPassword"></ion-input>
+              </ion-item>
+              <ion-item *ngIf="!editForm">
+                  <ion-label>
+                      <ion-icon name="lock-closed-outline"></ion-icon>&nbsp;&nbsp;&nbsp;{{'My Profile.Confirm Password' |translate}}: </ion-label>
+                  <ion-input type="password" formControlName="cnfPassword" (ionBlur)="checkCnfPassword()"></ion-input>
+              </ion-item>
+
+          </form>
+          <div *ngIf="!editForm">
+              <ion-grid fixed>
+                  <ion-row>
+                      <ion-col size="6">
+                          <ion-button class="cancelbtn" (click)="cancel()">
+                              {{'My Profile.Cancel' |translate}}
+                          </ion-button>
+                      </ion-col>
+                      <ion-col size="6">
+                          <ion-button class="submitbtn" (click)="submit()">
+                              {{'My Profile.Submit' |translate}}
+                          </ion-button>
+                      </ion-col>
+                  </ion-row>
+              </ion-grid>
+          </div>
+      </ion-card-content>
+  </ion-card>
+</ion-content>

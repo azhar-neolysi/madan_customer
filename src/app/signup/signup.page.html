@@ -1,0 +1,265 @@
+<ion-header [translucent]="true">
+  <ion-toolbar class="toolbar">
+    <ion-title >Resgistration</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="submit()">Submit</ion-button>
+    </ion-buttons>
+    <!-- <ion-buttons  slot="start">
+      <ion-button (click)="loginback()"><ion-icon  id="loginback" name="log-in-outline"></ion-icon></ion-button>
+    </ion-buttons> -->
+    <!-- <ion-icon name="log-in-outline"></ion-icon> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form class="signup-form" [formGroup]="registrationForm">
+    <ion-item class="form-item">
+      <ion-label position="floating">Name:</ion-label>
+      <ion-input type="text" formControlName="name"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">GST NO:</ion-label>
+      <ion-input
+        type="text"
+        formControlName="gstNo"
+        (ionBlur)="getDetailsFromGst()"
+      ></ion-input>
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating"
+        >{{'Resgistration.GST Document' | translate}}</ion-label
+      >
+      <ion-button class="uploadbtn" (click)="chooseFile('gstNo')"
+        >Choose GST</ion-button
+      >
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating">PAN:</ion-label>
+      <ion-input type="text" formControlName="pannumber"></ion-input>
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating"
+        >{{'Resgistration.PAN Document' | translate}}</ion-label
+      >
+      <ion-button class="uploadbtn" (click)="chooseFile('pannumber')"
+        >Choose PAN</ion-button
+      >
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating">Legal Name:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="legalName"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Address:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="address"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Nature Of Business:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="natureOfBusiness"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Entity Type:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="entityType"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Registration Type:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="registrationType"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Dept Code And Type:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="deptCodeAndType"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Registration Date:</ion-label>
+      <ion-input
+        type="text"
+        [disabled]="false"
+        formControlName="registrationDate"
+      ></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Telephone:</ion-label>
+      <ion-input type="number" formControlName="telePhone"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Mobile:</ion-label>
+      <ion-input type="number" formControlName="mobile"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Email:</ion-label>
+      <ion-input type="email" formControlName="email"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Description:</ion-label>
+      <ion-input type="text" formControlName="description"></ion-input>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label>Country</ion-label>
+      <ion-select
+        placeholder="Select One"
+        formControlName="refReferenceListCountryId"
+        interface="action-sheet"
+      >
+        <ion-select-option
+          *ngFor="let item of countries"
+          [value]="item.referenceListId"
+          >{{item.referenceListIdName}}</ion-select-option
+        >
+      </ion-select>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label>State</ion-label>
+      <ion-select
+        placeholder="Select One"
+        formControlName="refReferenceListStateId"
+        interface="action-sheet"
+        (ionChange)="portChange($event, 'state')"
+      >
+        <ion-select-option
+          *ngFor="let item of states"
+          [value]="item.destination"
+          >{{item.destination}}
+        </ion-select-option>
+      </ion-select>
+      <!-- <ionic-selectable
+        #stateComponent
+        formControlName="refReferenceListStateId"
+        modalCssClass="ionic-selectable-documentation-configuration"
+        closeButtonSlot="end"
+        [items]="states"
+        itemValueField="referenceListId"
+        itemTextField="referenceListIdName"
+        [canSearch]="true"
+        (onChange)="portChange($event, 'state')"
+        [searchFailText]=" 'No such material found.'"
+      >
+        <ng-template ionicSelectableHeaderTemplate>
+          <ion-toolbar class="toolbar-background">
+            <ion-buttons [slot]="stateComponent.closeButtonSlot">
+              <ion-button (click)="stateComponent.close()">
+                <ion-icon name="close-circle"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-title> Select State </ion-title>
+          </ion-toolbar>
+        </ng-template>
+      </ionic-selectable> -->
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label>City</ion-label>
+      <ion-select
+      placeholder="Select One"
+      formControlName="refReferenceListCityId"
+      interface="action-sheet"
+      (ionChange)="portChange($event, 'city')"
+    >
+      <ion-select-option
+        *ngFor="let item of cities"
+        [value]="item.referenceListId"
+        >{{item.referenceListIdName}}
+      </ion-select-option>
+    </ion-select>
+      <!-- <ionic-selectable
+        #cityComponent
+        formControlName="refReferenceListCityId"
+        modalCssClass="ionic-selectable-documentation-configuration"
+        closeButtonSlot="end"
+        [items]="cities"
+        itemValueField="referenceListId"
+        itemTextField="referenceListIdName"
+        [canSearch]="true"
+        (onChange)="portChange($event, 'city')"
+        [searchFailText]=" 'No such material found.'"
+      >
+        <ng-template ionicSelectableHeaderTemplate>
+          <ion-toolbar class="toolbar-background">
+            <ion-buttons [slot]="cityComponent.closeButtonSlot">
+              <ion-button (click)="cityComponent.close()">
+                <ion-icon name="close-circle"></ion-icon>
+              </ion-button>
+            </ion-buttons>
+            <ion-title> Select City </ion-title>
+          </ion-toolbar>
+        </ng-template>
+      </ionic-selectable> -->
+    </ion-item>
+    <ion-item class="form-item">
+      <ion-label position="floating">Building No:</ion-label>
+      <ion-textarea type="text" formControlName="address1"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Address Line 1:</ion-label>
+      <ion-textarea type="text" formControlName="address2"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Address Line 2:</ion-label>
+      <ion-textarea type="text" formControlName="address3"></ion-textarea>
+    </ion-item>
+
+    <ion-item class="form-item">
+      <ion-label position="floating">Land Mark:</ion-label>
+      <ion-textarea type="text" formControlName="address4"></ion-textarea>
+    </ion-item>
+  </form>
+  <div class="signup">
+    <ion-item class="form-item">
+      <label position="floating">Password :&nbsp; </label>
+      <ion-input
+        type="password"
+        [(ngModel)]="password"
+        placeholder="  ******** "
+      ></ion-input>
+    </ion-item>
+    <ion-item class="form-item">
+      <label position="floating">Confirm Password :&nbsp; </label>
+      <ion-input
+        type="password"
+        [(ngModel)]="cnfpassword"
+        placeholder=" ********"
+        (ionBlur)="checkCnfPassword()"
+      ></ion-input>
+    </ion-item>
+  </div>
+</ion-content>

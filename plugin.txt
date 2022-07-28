@@ -1,0 +1,29 @@
+
+
+
+
+
+
+npm install
+
+cordova-plugin-splashscreen
+@awesome-cordova-plugins/splash-screen
+
+cordova-plugin-statusbar
+@awesome-cordova-plugins/status-bar
+
+cordova-plugin-chooser
+@awesome-cordova-plugins/chooser
+
+cordova-plugin-file-transfer
+@awesome-cordova-plugins/file-transfer
+npm i cordova plugin add https://github.com/apache/cordova-plugin-file-transfer.git
+
+cordova-plugin-file
+@awesome-cordova-plugins/file
+
+cordova-plugin-nativegeocoder
+@awesome-cordova-plugins/native-geocoder
+
+@ngx-translate/http-loader
+@ionic/storage-angular

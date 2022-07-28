@@ -1,0 +1,6 @@
+{
+	"appId": "com.madan.customer",
+	"appName": "Madan Customer",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

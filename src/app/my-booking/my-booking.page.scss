@@ -1,0 +1,26 @@
+// @import './../../../global.scss';
+@import './../../global.scss';
+
+.card {
+    ion-card-content {
+        div {
+            font-size: 16px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+
+            mat-icon {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+
+.accpt {
+    margin-top: 200px !important;
+    color: white !important;
+}
+
+.delete-btn {
+    --background: var(--danger-color) !important;
+    color: white;
+}

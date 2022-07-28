@@ -8,8 +8,40 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'home',
+    redirectTo: 'login',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
+  },
+  {
+    path: 'manage-consigner',
+    loadChildren: () => import('./manage-consigner/manage-consigner.module').then( m => m.ManageConsignerPageModule)
+  },
+  {
+    path: 'manage-pol-pod',
+    loadChildren: () => import('./manage-pol-pod/manage-pol-pod.module').then( m => m.ManagePolPodPageModule)
+  },
+  {
+    path: 'my-booking',
+    loadChildren: () => import('./my-booking/my-booking.module').then( m => m.MyBookingPageModule)
+  },
+  {
+    path: 'new-booking',
+    loadChildren: () => import('./new-booking/new-booking.module').then( m => m.NewBookingPageModule)
+  },
+  {
+    path: 'profile',
+    loadChildren: () => import('./profile/profile.module').then( m => m.ProfilePageModule)
+  },
+  {
+    path: 'setting',
+    loadChildren: () => import('./setting/setting.module').then( m => m.SettingPageModule)
+  },
+  {
+    path: 'signup',
+    loadChildren: () => import('./signup/signup.module').then( m => m.SignupPageModule)
   },
 ];
 
