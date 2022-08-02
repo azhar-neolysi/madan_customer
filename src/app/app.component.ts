@@ -66,8 +66,8 @@ export class AppComponent implements OnInit, AfterViewInit,OnDestroy {
     this.backButtonSubscription =
       this.platform.backButton.subscribeWithPriority(10, async () => {
         console.log('-->>', this.routerOutlet.canGoBack(), this.router.url);
-        if (this.router.url === '/home') {
-          (navigator as any).app.exitApp(); // work in ionic 4
+        if (this.router.url === '/home' || this.router.url === '/login') {
+          (navigator as any).app.exitApp(); // work in ionic 6
         } else if (this.routerOutlet.canGoBack()) {
           this.routerOutlet.pop();
         } else {

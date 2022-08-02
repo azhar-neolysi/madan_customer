@@ -35,7 +35,7 @@
       >
       <ion-button class="uploadbtn" (click)="chooseFile('gstNo')"
         >Choose GST</ion-button
-      >
+      ><ion-icon name="checkbox-sharp" *ngIf="gstUpload"></ion-icon>
     </ion-item>
     <ion-item class="form-item">
       <ion-label position="floating">PAN:</ion-label>
@@ -46,7 +46,7 @@
         >{{'Resgistration.PAN Document' | translate}}</ion-label
       >
       <ion-button class="uploadbtn" (click)="chooseFile('pannumber')"
-        >Choose PAN</ion-button
+        >Choose PAN<ion-icon class="successgst" name="checkbox-sharp" *ngIf="panUpload"></ion-icon></ion-button
       >
     </ion-item>
     <ion-item class="form-item">
